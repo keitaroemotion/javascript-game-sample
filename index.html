@@ -64,10 +64,15 @@
                         r * (brickHeight + brickPadding)
                     ) + brickOffsetTop; 
 
-                    bricks[c][r].x = 0;
-                    bricks[c][r].y = 0;
+                    bricks[c][r].x = brickX;
+                    bricks[c][r].y = brickY;
                     graph.beginPath();
-                    graph.rect(0, 0, brickWidth, brickHeight);
+                    graph.rect(
+                              brickX,
+                              brickY,
+                              brickWidth,
+                              brickHeight
+                          );
                     graph.fillStyle = "#0095DD";
                     graph.fill();
                     graph.closePath();
