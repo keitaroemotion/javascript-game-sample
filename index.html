@@ -17,7 +17,6 @@
 </head>
 
 <body>
-
     <canvas id="myCanvas" width="480" height="320"></canvas>
 
     <script>
@@ -29,6 +28,15 @@
         var dx = 2;
         var dy = -2;
 
+        function drawBall(graph)
+        {
+            graph.beginPath();
+            graph.arc(x, y, 10, 0, Math.PI*2);
+            graph.fillStyle = "#0095DD";
+            graph.fill();
+            graph.closePath();    
+        }
+
         function draw()
         {
             graph.clearRect(
@@ -37,48 +45,12 @@
                       canvas.width,
                       canvas.height
                   );
-            graph.beginPath();
-            graph.arc(x, y, 10, 0, Math.PI*2);
-            graph.fillStyle = "#0095DD";
-            graph.fill();
-            graph.closePath();    
+            drawBall(graph);
             y += dy;
             x += dx;
         }
 
         setInterval(draw, 10); // every 10 millisceonds
-
-        // function drawRectangle(graph)
-        // {
-        //     graph.beginPath();
-        //     graph.rect(20, 40, 50, 50);
-        //     graph.fillStyle = "#FF0000";
-        //     graph.fill();
-        //     graph.closePath();
-        // }
-
-        // function drawCircle(graph)
-        // {
-        //     graph.beginPath();
-        //     graph.arc(240, 160, 20, 0, Math.PI*2, false);
-        //     graph.fillStyle = "green";
-        //     graph.fill();
-        //     graph.closePath();
-        // }
-
-        // function drawRectangleStroked(graph)
-        // {
-        //     graph.beginPath();
-        //     graph.rect(160, 10, 100, 40);
-        //     graph.strokeStyle = "rgba(0, 0, 255, 0.5)";
-        //     graph.stroke();
-        //     graph.closePath();
-        // }
-
-        // drawRectangle(graph);
-        // drawRectangleStroked(graph);
-        // drawCircle(graph);
     </script>
-
 </body>
 </html>
