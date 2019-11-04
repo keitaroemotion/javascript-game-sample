@@ -44,6 +44,7 @@
         var brickPadding     = 10;
         var brickOffsetTop   = 30;
         var brickOffsetLeft  = 30;
+        var score            = 0;
 
         var bricks = [];
         for(var c = 0; c < brickColumnCount; c++) {
@@ -53,7 +54,8 @@
             }
         }
 
-        function drawBricks(graph) {
+        function drawBricks(graph)
+        {
             for(var c = 0; c < brickColumnCount; c++) {
                 for(var r = 0; r < brickRowCount; r++) {
                     if(bricks[c][r].status == 1) {
@@ -91,7 +93,8 @@
             graph.closePath();    
         }
 
-        function drawPaddle(graph) {
+        function drawPaddle(graph)
+        {
             graph.beginPath();
             graph.rect(
                       paddleX,
@@ -102,6 +105,13 @@
             graph.fillStyle = "#0095DD";
             graph.fill();
             graph.closePath();
+        }
+
+        function drawScore()
+        {
+            graph.font      = "16px Arial";
+            graph.fillStyle = "#0095DD";
+            graph.fillText("Score: " + score, 8, 20);
         }
 
         function draw()
@@ -115,6 +125,7 @@
 
             drawBall  (graph);
             drawPaddle(graph);
+            drawScore();
             collisionDetection();
 
             if(
@@ -169,7 +180,8 @@
                      false
                  );
 
-        function collisionDetection() {
+        function collisionDetection() 
+        {
             for(var c = 0; c < brickColumnCount; c++) {
                 for(var r = 0; r < brickRowCount; r++) {
                     var b = bricks[c][r];
@@ -177,13 +189,15 @@
                         if(x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight) {
                             dy       = -dy;
                             b.status = 0;
+                            score++;
                         }
                     }
                 }
             }
         }
 
-        function keyDownHandler(e) {
+        function keyDownHandler(e)
+        {
             if(
                 e.key == "Right"      ||
                 e.key == "ArrowRight" ||
@@ -200,7 +214,8 @@
             }
         }
 
-        function keyUpHandler(e) {
+        function keyUpHandler(e)
+        {
             if(
                 e.key == "Right"      || 
                 e.key == "ArrowRight" || 
