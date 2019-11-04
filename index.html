@@ -155,7 +155,7 @@
                     {
                         alert("GAME OVER");
                         document.location.reload();
-                        clearInterval(interval);
+                        //clearInterval(interval);
                     }
                     else
                     {
@@ -192,6 +192,7 @@
             }
 
             drawBricks(graph);
+            requestAnimationFrame(draw);
         }
 
         document.addEventListener(
@@ -276,11 +277,11 @@
                 leftPressed = false;
             }
         }
-
-        var interval = setInterval(
-                           draw,
-                           10
-                       ); 
+        draw();
+        //var interval = setInterval(
+        //                   draw,
+        //                   10
+        //               ); 
                        // every 10 millisceonds
     </script>
 </body>
