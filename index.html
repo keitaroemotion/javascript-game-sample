@@ -73,10 +73,17 @@
             drawPaddle(graph);
 
             if(
-                y + dy > canvas.height - ballRadius || 
                 y + dy < ballRadius
             ) {
                 dy = -dy;
+            } else if(y + dy > canvas.height-ballRadius) {
+                if(x > paddleX && x < paddleX + paddleWidth) {
+                    dy = -dy;
+                } else {
+                    alert("GAME OVER");
+                    document.location.reload();
+                    clearInterval(interval);
+                }
             }
 
             if(
@@ -116,24 +123,44 @@
                  );
 
         function keyDownHandler(e) {
-            if(e.key == "Right" || e.key == "ArrowRight") {
+            if(
+                e.key == "Right"      ||
+                e.key == "ArrowRight" ||
+                e.key == "l"
+            ) {
                 rightPressed = true;
             }
-            else if(e.key == "Left" || e.key == "ArrowLeft") {
+            else if(
+                e.key == "Left"       ||
+                e.key == "ArrowLeft"  ||
+                e.key == "h"
+            ) {
                 leftPressed = true;
             }
         }
 
         function keyUpHandler(e) {
-            if(e.key == "Right" || e.key == "ArrowRight") {
+            if(
+                e.key == "Right"      || 
+                e.key == "ArrowRight" || 
+                e.key == "l"
+            ) {
                 rightPressed = false;
             }
-            else if(e.key == "Left" || e.key == "ArrowLeft") {
+            else if(
+                e.key == "Left"       || 
+                e.key == "ArrowLeft"  ||
+                e.key == "h"
+            ) {
                 leftPressed = false;
             }
         }
 
-        setInterval(draw, 10); // every 10 millisceonds
+        var interval = setInterval(
+                           draw,
+                           10
+                       ); 
+                       // every 10 millisceonds
     </script>
 </body>
 </html>
