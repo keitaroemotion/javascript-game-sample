@@ -44,6 +44,7 @@
         var brickPadding     = 10;
         var brickOffsetTop   = 30;
         var brickOffsetLeft  = 30;
+        var lives            = 3;
         var score            = 0;
 
         var bricks = [];
@@ -93,6 +94,12 @@
             graph.closePath();    
         }
 
+        function drawLives(graph) {
+            graph.font = "16px Arial";
+            graph.fillStyle = "#0095DD";
+            graph.fillText("Lives: "+lives, canvas.width-65, 20);
+        }
+
         function drawPaddle(graph)
         {
             graph.beginPath();
@@ -126,19 +133,38 @@
             drawBall  (graph);
             drawPaddle(graph);
             drawScore();
+            drawLives(graph);
             collisionDetection();
 
             if(
                 y + dy < ballRadius
-            ) {
+            )
+            {
                 dy = -dy;
-            } else if(y + dy > canvas.height-ballRadius) {
-                if(x > paddleX && x < paddleX + paddleWidth) {
+            }
+            else if(y + dy > canvas.height-ballRadius)
+            {
+                if(x > paddleX && x < paddleX + paddleWidth)
+                {
                     dy = -dy;
-                } else {
-                    alert("GAME OVER");
-                    document.location.reload();
-                    clearInterval(interval);
+                }
+                else 
+                {
+                    lives--;
+                    if(!lives) 
+                    {
+                        alert("GAME OVER");
+                        document.location.reload();
+                        clearInterval(interval);
+                    }
+                    else
+                    {
+                        x       = canvas.width  / 2;
+                        y       = canvas.height - 30;
+                        dx      = 2;
+                        dy      = -2;
+                        paddleX = (canvas.width - paddleWidth) / 2;
+                    }
                 }
             }
 
