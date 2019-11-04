@@ -3,6 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <title>Gamedev Canvas Workshop</title>
+    <br/>
+    <br/>
+    <br/>
     <style>
     	* { 
             padding: 0;
@@ -23,15 +26,16 @@
         var canvas = document.getElementById("myCanvas");
         var graph  = canvas.getContext("2d");
 
-        var x  = canvas.width  / 2;
-        var y  = canvas.height - 30;
-        var dx = 2;
-        var dy = -2;
+        var x          = canvas.width  / 2;
+        var y          = canvas.height - 30;
+        var dx         = 2;
+        var dy         = -2;
+        var ballRadius = 10;
 
         function drawBall(graph)
         {
             graph.beginPath();
-            graph.arc(x, y, 10, 0, Math.PI*2);
+            graph.arc(x, y, ballRadius, 0, Math.PI*2);
             graph.fillStyle = "#0095DD";
             graph.fill();
             graph.closePath();    
@@ -46,6 +50,15 @@
                       canvas.height
                   );
             drawBall(graph);
+
+            if(y + dy > canvas.height || y + dy < 0) {
+                dy = -dy;
+            }
+
+            if(x + dx > canvas.width || x + dx < 0) {
+                dx = -dx;
+            }
+
             y += dy;
             x += dx;
         }
